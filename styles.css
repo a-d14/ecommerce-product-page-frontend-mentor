@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&display=swap");
+
+@layer typography {
+  :root {
+    --font-size-tp-one: calc(44 / 16 * 1rem);
+    --font-size-tp-two: calc(28 / 16 * 1rem);
+    --font-size-tp-three: calc(16 / 16 * 1rem);
+    --font-size-tp-four: calc(15 / 16 * 1rem);
+    --font-size-tp-five: calc(13 / 16 * 1rem);
+    --font-size-tp-six: calc(12 / 16 * 1rem);
+
+    --line-height-tp-one: calc(48 / 16 * 1rem);
+    --line-height-tp-two: calc(32 / 16 * 1rem);
+    --line-height-tp-three: calc(26 / 16 * 1rem);
+    --line-height-tp-four: calc(26 / 16 * 1rem);
+    --line-height-tp-five: calc(16 / 16 * 1rem);
+    --line-height-tp-six: calc(15 / 16 * 1rem);
+
+    --letter-spacing-tp-five: calc(2 / 16 * 1rem);
+    --letter-spacing-tp-six: calc(1.85 / 16 * 1rem);
+
+    --text-preset-1: 700 var(--font-size-tp-one) / var(--line-height-tp-one)
+        "Kumbh Sans",
+      sans-serif;
+    --text-preset-2: 700 var(--font-size-tp-two) / var(--line-height-tp-two)
+        "Kumbh Sans",
+      sans-serif;
+    --text-preset-3: 400 var(--font-size-tp-three) / var(--line-height-tp-three)
+        "Kumbh Sans",
+      sans-serif;
+    --text-preset-3-bold: 700 var(--font-size-tp-three) /
+        var(--line-height-tp-three) "Kumbh Sans",
+      sans-serif;
+    --text-preset-4: 400 var(--font-size-tp-four) / var(--line-height-tp-four)
+        "Kumbh Sans",
+      sans-serif;
+    --text-preset-5: 700 var(--font-size-tp-five) / var(--line-height-tp-five)
+        "Kumbh Sans",
+      sans-serif;
+    --text-preset-6: 700 var(--font-size-tp-six) / var(--line-height-tp-six)
+        "Kumbh Sans",
+      sans-serif;
+  }
+}
+
+@layer colors {
+  :root {
+    --white: #ffffff;
+    --black: #000000;
+
+    --grey-950: #1d2026;
+    --grey-500: #69707d;
+    --grey-300: #c3cad9;
+    --grey-100: #e4e9f2;
+    --grey-50: #f6f8fd;
+
+    --orange-500: #ff7e1b;
+    --orange-300: #ffab6a;
+  }
+}
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure {
+    margin-block-end: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  a {
+    color: currentColor;
+  }
+
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
+
+@layer layout {
+    body {
+        --content-width: calc(327 / 16 * 1rem);
+
+        @media (width >= calc(768 / 16 * 1rem)) {
+            --content-width: calc(608 / 16 * 1rem);
+        }
+
+        @media (width >= calc(1440 / 16 * 1rem)) {
+            --content-width: calc(1110 / 16 * 1rem);
+        }
+
+        display: grid;
+        grid-template-columns: 1fr var(--content-width) 1fr;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+}
