@@ -1,35 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-commerce product page</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  Collections
-  Men
-  Women
-  About
-  Contact
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce product page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <button
+        class="header__open-navigation"
+        aria-label="Open Navigation Menu"
+        aria-expanded="false"
+        id="btnOpen"
+      >
+        <img src="images/icon-menu.svg" alt="" width="16" height="15" />
+      </button>
+      <img
+        class="header__company-logo"
+        src="images/logo.svg"
+        width="138"
+        height="20"
+        alt="sneakers company logo"
+      />
+      <div class="header__navigation-overlay"></div>
+      <nav
+        class="header__navigation"
+        role="dialog"
+        aria-label="Navigation Menu"
+      >
+        <button
+          class="header__close-navigation"
+          aria-label="Close Navigation Menu"
+          id="btnClose"
+        >
+          <img src="images/icon-close.svg" alt="" width="14" height="15"/>
+        </button>
+        <ul class="header__navigation-links">
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="header__cart" id="btnCart">
+        <svg
+          class="header__cart-logo"
+          aria-label="Open Cart"
+          width="22"
+          height="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+            fill-rule="nonzero"
+          />
+        </svg>
+        <span class="header__cart-item-count">0</span>
+        <div class="header__cart-items" inert></div>
+      </button>
+      <a id="link-profile" class="header__user-profile" href="#">
+        <img
+          src="images/image-avatar.png"
+          alt="profile picture, click to visit your profile"
+          width="100"
+          height="100"
+        />
+      </a>
+    </header>
 
-  Sneaker Company
+    <main>
+      Sneaker Company Fall Limited Edition Sneakers These low-profile sneakers
+      are your perfect casual wear companion. Featuring a durable rubber outer
+      sole, they’ll withstand everything the weather can offer. $125.00 50%
+      $250.00 0 Add to cart
+    </main>
 
-  Fall Limited Edition Sneakers
-
-  These low-profile sneakers are your perfect casual wear companion. Featuring a 
-  durable rubber outer sole, they’ll withstand everything the weather can offer.
-
-  $125.00
-  50%
-  $250.00
-
-  0
-  Add to cart
-  
-  <!-- <div class="attribution">
+    <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div> -->
-</body>
+  </body>
 </html>
