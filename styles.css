@@ -286,12 +286,182 @@
         }
 
         .header__user-profile:focus {
+            outline: none;
             border: calc(2 / 16 * 1rem) solid var(--orange-500);
             border-radius: 50%;
         }
     }
 }
 
+@layer productPage {
+  .product-page {
+    @media (width >= calc(1440 / 16 * 1rem)) {
+      padding-inline: calc(45 / 16 * 1rem);
+      margin-block-start: calc(96 / 16 * 1rem);
+
+      display: flex;
+      gap: calc(128 / 16 * 1rem);
+
+      .product-page__lightbox {
+        flex: 0 0 calc(448 / 16 * 1rem);
+        background-color: red;
+      }
+
+      .product-page__content {
+        /* flex-basis: calc(445 / 16 * 1rem); */
+        align-self: center;
+      }
+    }
+
+    .product-page__information {
+      display: flex;
+      flex-direction: column;
+
+      gap: calc(16 / 16 * 1rem);
+
+      margin-block-start: calc(24 / 16 * 1rem);
+
+      span {
+        font: var(--text-preset-6);
+        letter-spacing: var(--letter-spacing-tp-six);
+        text-transform: uppercase;
+        color: var(--grey-500);
+      }
+
+      h2 {
+        font: var(--text-preset-2);
+        color: var(--grey-950);
+      }
+
+      p {
+        font: var(--text-preset-4);
+        color: var(--grey-500);
+      }
+
+      @media (width >= calc(768 / 16 * 1rem)) {
+        margin-block-start: calc(48 / 16 * 1rem);
+        gap: calc(24 / 16 * 1rem);
+
+        h2 {
+          font: var(--text-preset-1);
+          max-width: 20ch;
+        }
+
+        p {
+          font: var(--text-preset-3);
+        }
+      }
+
+      @media (width >= calc(1440 / 16 * 1rem)) {
+        margin-block-start: 0;
+      }
+    }
+
+    .product-page__pricing {
+      margin-block: calc(32 / 16 * 1rem);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      row-gap: calc(12 / 16 * 1rem);
+
+      .product-page__current-price {
+        font: var(--text-preset-2);
+        color: var(--grey-950);
+      }
+
+      .product-page__discount {
+        display: grid;
+        align-items: center;
+
+        margin-inline-start: calc(16 / 16 * 1rem);
+
+        background-color: var(--grey-950);
+        border-radius: calc(6 / 16 * 1rem);
+        padding-inline: calc(10 / 16 * 1rem);
+
+        font: var(--text-preset-3-bold);
+        color: var(--white);
+      }
+
+      .product-page__original-price {
+        margin-inline-start: auto;
+        text-decoration: line-through;
+
+        font: var(--text-preset-3-bold);
+        color: var(--grey-500);
+      }
+
+      @media (width >= calc(768 / 16 * 1rem)) {
+        width: 30%;
+        margin-block: calc(24 / 16 * 1rem);
+
+        .product-page__original-price {
+          margin-inline-start: 0;
+        }        
+      }
+
+      @media (width >= calc(1440 / 16 * 1rem)) {
+        width: 50%; 
+      }
+    }
+
+    .product-page__actions {
+      display: flex;
+      flex-direction: column;
+      gap: calc(16 / 16 * 1rem);
+
+      .product-page__set-quantity {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: calc(16 / 16 * 1rem);
+        border-radius: calc(10 / 16 * 1rem);
+        background-color: var(--grey-50);
+
+        font: var(--text-preset-3-bold);
+
+        button {
+          background: transparent;
+        }
+      }
+
+      .product-page__add-to-cart {
+        display: flex;
+        gap: calc(16 / 16 * 1rem);
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: calc(17.46 / 16 * 1rem);
+          height: calc(16 / 16 * 1rem);
+        }
+
+        padding-block: calc(16 / 16 * 1rem);
+        border-radius: calc(10 / 16 * 1rem);
+        background-color: var(--orange-500);
+
+        font: var(--text-preset-3-bold);
+      }
+
+      @media (width >= calc(768 / 16 * 1rem)) {
+        flex-direction: row;
+        
+        > * {
+          flex-grow: 1;
+        }
+      }
+
+      @media (width >= calc(1440 / 16 * 1rem)) {
+        .product-page__add-to-cart {
+          flex-grow: 2;
+        }
+      }
+    }
+
+  }
+}
+
 main {
-    grid-column: 2;
+  grid-column: 2;
 }
