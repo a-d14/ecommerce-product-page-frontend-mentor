@@ -2,7 +2,6 @@ const main = document.querySelector('main');
 
 const btnOpen = document.getElementById('btnOpen');
 const btnClose = document.getElementById('btnClose');
-const btnCart = document.getElementById('btnCart');
 const linkProfile = document.getElementById('link-profile');
 
 const navMenu = document.querySelector('.header__navigation');
@@ -59,4 +58,70 @@ btnClose.addEventListener('click', closeMenu);
 
 media.addEventListener('change', (e) => {
     setUpNav(e);
+});
+
+// CART FUNCTIONALITY
+const btnCart = document.getElementById('btnCart');
+const currentQuantityInCart = document.getElementById("currentQuantityInCart");
+const currentQuantityInCartSmall = document.getElementById("currentQuantityInCartSmall");
+
+const setCartQuantity = document.getElementById("setCartQuantity");
+const cart = document.querySelector(".header__cart");
+const cartBody = document.querySelector(".header__cart-body");
+const addItemToCart = document.getElementById("addItemToCart");
+let removeItemFromCart = null;
+
+btnCart.addEventListener('click', () => {
+    const isExpanded = btnCart.getAttribute('aria-expanded') === 'true';
+    const nextState = !isExpanded;
+  
+    btnCart.setAttribute('aria-expanded', nextState.toString());
+  
+    if (!nextState) {
+      cart.setAttribute('inert', '');
+    } else {
+      cart.removeAttribute('inert');
+    }
+  });
+
+setCartQuantity.addEventListener('click', (e) => {
+    const target = e.target;
+    if(target.parentElement.id === "decrementItemQuantity" && +currentQuantityInCart.textContent > 0) {
+        currentQuantityInCart.textContent = +currentQuantityInCart.textContent - 1;
+    } else if (target.parentElement.id === "incrementItemQuantity") {
+        currentQuantityInCart.textContent = +currentQuantityInCart.textContent + 1;
+    }
+});
+
+addItemToCart.addEventListener('click', () => {
+    if(+currentQuantityInCart.textContent > 0) {
+        cartBody.innerHTML = `
+            <ul>
+              <li class="cart-item">
+                <img src="images/image-product-1-thumbnail.jpg" alt="product thumbnail" />
+                <span class="item-name">Fall Limited Edition Sneakers</span>
+                <span class="item-pricing">$125.00 x ${currentQuantityInCart.textContent} <span>$${(125 * +currentQuantityInCart.textContent).toFixed(2)}</span></span>
+                <button class="item-delete" aria-label="remove item from cart" id="removeItemFromCart">
+                  <svg width="14" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                      <path d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z" id="a"/>
+                    </defs>
+                    <use fill-rule="nonzero" xlink:href="#a"/>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+        `;
+        currentQuantityInCartSmall.textContent = currentQuantityInCart.textContent;
+
+        setTimeout(() => {
+            removeItemFromCart = document.getElementById("removeItemFromCart");
+            removeItemFromCart.addEventListener('click', () => {
+                cartBody.innerHTML = '<p>Your cart is empty.</p>';
+                currentQuantityInCartSmall.textContent = 0;
+                removeItemFromCart = null;
+            });
+        }, 0);
+
+    }
 });
