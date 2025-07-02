@@ -7,6 +7,8 @@ const linkProfile = document.getElementById('link-profile');
 const navMenu = document.querySelector('.header__navigation');
 const navOverlay = document.querySelector('.header__navigation-overlay');
 
+const btnCart = document.getElementById('btnCart');
+
 const media = window.matchMedia('(width < 90em)');
 
 const setUpNav = (e) => {
@@ -61,7 +63,6 @@ media.addEventListener('change', (e) => {
 });
 
 // CART FUNCTIONALITY
-const btnCart = document.getElementById('btnCart');
 const currentQuantityInCart = document.getElementById("currentQuantityInCart");
 const currentQuantityInCartSmall = document.getElementById("currentQuantityInCartSmall");
 
@@ -124,4 +125,56 @@ addItemToCart.addEventListener('click', () => {
         }, 0);
 
     }
+});
+
+// LIGHTBOX COMPONENT
+const carouselImages = document.querySelector(".lightbox__carousel-images");
+const prevImg = document.querySelector(".lightbox__carousel-prev");
+const nextImg = document.querySelector(".lightbox__carousel-next");
+const carouselThumbnails = document.querySelectorAll(".lightbox__carousel-thumbnails > *");
+carouselThumbnails[0].classList.add('selected');
+
+let prevIndex = -1;
+let currentIndex = 0;
+const totalImages = carouselImages.children.length;
+
+prevImg.addEventListener('click', () => {
+  if (currentIndex > 0) {
+    prevIndex = currentIndex;
+    currentIndex--;
+    carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+    carouselThumbnails[prevIndex].classList.remove('selected');
+    carouselThumbnails[currentIndex].classList.add('selected');
+  }
+  prevImg.disabled = currentIndex === 0;
+  nextImg.disabled = currentIndex === totalImages - 1;
+});
+
+nextImg.addEventListener('click', () => {
+  if (currentIndex < totalImages - 1) {
+    prevIndex = currentIndex;
+    currentIndex++;
+    carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+    carouselThumbnails[prevIndex].classList.remove('selected');
+    carouselThumbnails[currentIndex].classList.add('selected');
+  }
+  prevImg.disabled = currentIndex === 0;
+  nextImg.disabled = currentIndex === totalImages - 1;
+});
+
+carouselThumbnails.forEach((thumbnail, idx) => {
+    thumbnail.addEventListener('click', () => {
+        if(thumbnail.classList.contains('selected')) {
+            // OPEN CAROUSEL OVERLAY
+        } else {
+            prevIndex = currentIndex;
+            currentIndex = idx;
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevImg.disabled = currentIndex === 0;
+            nextImg.disabled = currentIndex === totalImages - 1;
+
+            carouselThumbnails[prevIndex].classList.remove('selected');
+            thumbnail.classList.add('selected');
+        }
+    })
 });

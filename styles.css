@@ -295,8 +295,6 @@
       top: 110%;
       z-index: 1;
 
-      border: 1px solid red;
-
       opacity: 0;
 
       @media (width >= calc(768 / 16 * 1rem)) {
@@ -414,7 +412,100 @@
 @layer productPage {
   .product-page {
     .product-page__lightbox {
-      background-color: red;
+
+      .lightbox__carousel {
+        height: inherit;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lightbox__carousel-images {
+        height: calc(300 / 16 * 1rem);
+        display: flex;
+
+        transition: transform 0.5s;
+
+        img {
+          flex: 0 0 100%;
+          object-fit: cover;
+          @media (width >= calc(768 / 16 * 1rem)) {
+            border-radius: calc(15 / 16 * 1rem);
+          }
+        }
+
+        @media (width >= calc(768 / 16 * 1rem)) {
+          height: calc(290 / 16 * 1rem);
+        }
+
+        @media (width >= calc(1440 / 16 * 1rem)) {
+          height: auto;
+          transition: none;
+        }
+
+      }
+
+      .lightbox__carousel-controls {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        
+        width: calc(40 / 16 * 1rem);
+        height: calc(40 / 16 * 1rem);
+        border-radius: 50%;
+
+        svg {
+          fill: none;
+        }
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media  (width >= calc(1440 / 16 * 1rem)) {
+          display: none;
+        }
+      }
+
+      .lightbox__carousel-prev {
+        left: calc(16 / 16  * 1rem);
+      }
+
+      .lightbox__carousel-next {
+        right: calc(16 / 16  * 1rem);
+      }
+
+      .lightbox__carousel-thumbnails {
+        display: none;
+
+        > * {
+          position: relative;
+          border: 2px solid transparent;
+          background-clip: padding-box;
+        }
+
+        .selected {
+          border: 2px solid var(--orange-500);
+        }
+
+        .selected::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (width >= calc(1440 / 16 * 1rem)) {
+          display: flex;
+          gap: calc(32 / 16 * 1rem);
+          margin-top: calc(32 / 16 * 1rem);
+  
+          > * {
+            border-radius: calc(10 / 16 * 1rem);
+            overflow: hidden;
+          }
+        }
+      }
     }
 
     .product-page__content {
@@ -444,7 +535,6 @@
       p {
         font: var(--text-preset-4);
         color: var(--grey-500);
-        width: 37ch;
       }
 
       @media (width >= calc(768 / 16 * 1rem)) {
@@ -453,7 +543,7 @@
 
         h2 {
           font: var(--text-preset-1);
-          max-width: 20ch;
+          /* max-width: 20ch; */
         }
 
         p {
