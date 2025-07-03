@@ -1,70 +1,72 @@
-const main = document.querySelector('main');
+const main = document.querySelector("main");
 
-const btnOpen = document.getElementById('btnOpen');
-const btnClose = document.getElementById('btnClose');
-const linkProfile = document.getElementById('link-profile');
+const btnOpen = document.getElementById("btnOpen");
+const btnClose = document.getElementById("btnClose");
+const linkProfile = document.getElementById("link-profile");
 
-const navMenu = document.querySelector('.header__navigation');
-const navOverlay = document.querySelector('.header__navigation-overlay');
+const navMenu = document.querySelector(".header__navigation");
+const navOverlay = document.querySelector(".header__navigation-overlay");
 
-const btnCart = document.getElementById('btnCart');
+const btnCart = document.getElementById("btnCart");
 
-const media = window.matchMedia('(width < 90em)');
+const isNotDesktop = window.matchMedia("(width < 90em)");
 
 const setUpNav = (e) => {
-    if(e.matches) {
-        console.log(true);
-        btnClose.setAttribute('inert', '');
-        navOverlay.setAttribute('inert', '');
-        navMenu.setAttribute('inert', '');
-        navMenu.style.transition='none';
-    } else {
-        closeMenu();
-        navMenu.removeAttribute('inert');
-    }
-}
+  if (e.matches) {
+    console.log(true);
+    btnClose.setAttribute("inert", "");
+    navOverlay.setAttribute("inert", "");
+    navMenu.setAttribute("inert", "");
+    navMenu.style.transition = "none";
+  } else {
+    closeMenu();
+    navMenu.removeAttribute("inert");
+  }
+};
 
-setUpNav(media);
+setUpNav(isNotDesktop);
 
 function openMenu() {
-    btnOpen.setAttribute('aria-expanded', 'true');
-    btnOpen.setAttribute('inert', '');
-    btnCart.setAttribute('inert', '');
-    linkProfile.setAttribute('inert', '');
+  btnOpen.setAttribute("aria-expanded", "true");
+  btnOpen.setAttribute("inert", "");
+  btnCart.setAttribute("inert", "");
+  linkProfile.setAttribute("inert", "");
 
-    main.setAttribute('inert', '');
+  main.setAttribute("inert", "");
 
-    btnClose.removeAttribute('inert');
-    navMenu.removeAttribute('inert');
-    navMenu.removeAttribute('style');   
+  btnClose.removeAttribute("inert");
+  navMenu.removeAttribute("inert");
+  navMenu.removeAttribute("style");
 }
 
 function closeMenu() {
-    btnOpen.setAttribute('aria-expanded', 'false');
-    btnOpen.removeAttribute('inert');
-    btnCart.removeAttribute('inert');
-    linkProfile.removeAttribute('inert');
+  btnOpen.setAttribute("aria-expanded", "false");
+  btnOpen.removeAttribute("inert");
+  btnCart.removeAttribute("inert");
+  linkProfile.removeAttribute("inert");
 
-    btnClose.setAttribute('inert', '');
-    navMenu.setAttribute('inert', '');
+  btnClose.setAttribute("inert", "");
+  navMenu.setAttribute("inert", "");
 
-    main.removeAttribute('inert');
+  main.removeAttribute("inert");
 
-    setTimeout(() => {
-        navMenu.style.transition='none';
-    }, 500)
+  setTimeout(() => {
+    navMenu.style.transition = "none";
+  }, 500);
 }
 
-btnOpen.addEventListener('click', openMenu);
-btnClose.addEventListener('click', closeMenu);
+btnOpen.addEventListener("click", openMenu);
+btnClose.addEventListener("click", closeMenu);
 
-media.addEventListener('change', (e) => {
-    setUpNav(e);
+isNotDesktop.addEventListener("change", (e) => {
+  setUpNav(e);
 });
 
 // CART FUNCTIONALITY
 const currentQuantityInCart = document.getElementById("currentQuantityInCart");
-const currentQuantityInCartSmall = document.getElementById("currentQuantityInCartSmall");
+const currentQuantityInCartSmall = document.getElementById(
+  "currentQuantityInCartSmall"
+);
 
 const setCartQuantity = document.getElementById("setCartQuantity");
 const cart = document.querySelector(".header__cart");
@@ -72,36 +74,43 @@ const cartBody = document.querySelector(".header__cart-body");
 const addItemToCart = document.getElementById("addItemToCart");
 let removeItemFromCart = null;
 
-btnCart.addEventListener('click', () => {
-    const isExpanded = btnCart.getAttribute('aria-expanded') === 'true';
-    const nextState = !isExpanded;
-  
-    btnCart.setAttribute('aria-expanded', nextState.toString());
-  
-    if (!nextState) {
-      cart.setAttribute('inert', '');
-    } else {
-      cart.removeAttribute('inert');
-    }
-  });
+btnCart.addEventListener("click", () => {
+  const isExpanded = btnCart.getAttribute("aria-expanded") === "true";
+  const nextState = !isExpanded;
 
-setCartQuantity.addEventListener('click', (e) => {
-    const target = e.target;
-    if(target.parentElement.id === "decrementItemQuantity" && +currentQuantityInCart.textContent > 0) {
-        currentQuantityInCart.textContent = +currentQuantityInCart.textContent - 1;
-    } else if (target.parentElement.id === "incrementItemQuantity") {
-        currentQuantityInCart.textContent = +currentQuantityInCart.textContent + 1;
-    }
+  btnCart.setAttribute("aria-expanded", nextState.toString());
+
+  if (!nextState) {
+    cart.setAttribute("inert", "");
+  } else {
+    cart.removeAttribute("inert");
+  }
 });
 
-addItemToCart.addEventListener('click', () => {
-    if(+currentQuantityInCart.textContent > 0) {
-        cartBody.innerHTML = `
+setCartQuantity.addEventListener("click", (e) => {
+  const target = e.target;
+  if (
+    target.parentElement.id === "decrementItemQuantity" &&
+    +currentQuantityInCart.textContent > 0
+  ) {
+    currentQuantityInCart.textContent = +currentQuantityInCart.textContent - 1;
+  } else if (target.parentElement.id === "incrementItemQuantity") {
+    currentQuantityInCart.textContent = +currentQuantityInCart.textContent + 1;
+  }
+});
+
+addItemToCart.addEventListener("click", () => {
+  if (+currentQuantityInCart.textContent > 0) {
+    cartBody.innerHTML = `
             <ul>
               <li class="cart-item">
                 <img src="images/image-product-1-thumbnail.jpg" alt="product thumbnail" />
                 <span class="item-name">Fall Limited Edition Sneakers</span>
-                <span class="item-pricing">$125.00 x ${currentQuantityInCart.textContent} <span>$${(125 * +currentQuantityInCart.textContent).toFixed(2)}</span></span>
+                <span class="item-pricing">$125.00 x ${
+                  currentQuantityInCart.textContent
+                } <span>$${(125 * +currentQuantityInCart.textContent).toFixed(
+      2
+    )}</span></span>
                 <button class="item-delete" aria-label="remove item from cart" id="removeItemFromCart">
                   <svg width="14" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs>
@@ -113,68 +122,179 @@ addItemToCart.addEventListener('click', () => {
               </li>
             </ul>
         `;
-        currentQuantityInCartSmall.textContent = currentQuantityInCart.textContent;
+    currentQuantityInCartSmall.textContent = currentQuantityInCart.textContent;
 
-        setTimeout(() => {
-            removeItemFromCart = document.getElementById("removeItemFromCart");
-            removeItemFromCart.addEventListener('click', () => {
-                cartBody.innerHTML = '<p>Your cart is empty.</p>';
-                currentQuantityInCartSmall.textContent = 0;
-                removeItemFromCart = null;
-            });
-        }, 0);
-
-    }
+    setTimeout(() => {
+      removeItemFromCart = document.getElementById("removeItemFromCart");
+      removeItemFromCart.addEventListener("click", () => {
+        cartBody.innerHTML = "<p>Your cart is empty.</p>";
+        currentQuantityInCartSmall.textContent = 0;
+        removeItemFromCart = null;
+      });
+    }, 0);
+  }
 });
 
 // LIGHTBOX COMPONENT
-const carouselImages = document.querySelector(".lightbox__carousel-images");
-const prevImg = document.querySelector(".lightbox__carousel-prev");
-const nextImg = document.querySelector(".lightbox__carousel-next");
-const carouselThumbnails = document.querySelectorAll(".lightbox__carousel-thumbnails > *");
-carouselThumbnails[0].classList.add('selected');
+const isDesktop = window.matchMedia("(width >= calc(1440 / 16 * 1rem))");
 
-let prevIndex = -1;
+let prevIndex = 0;
 let currentIndex = 0;
-const totalImages = carouselImages.children.length;
+let totalImages = 0;
 
-prevImg.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    prevIndex = currentIndex;
-    currentIndex--;
-    carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-    carouselThumbnails[prevIndex].classList.remove('selected');
-    carouselThumbnails[currentIndex].classList.add('selected');
-  }
-  prevImg.disabled = currentIndex === 0;
-  nextImg.disabled = currentIndex === totalImages - 1;
-});
+document.querySelectorAll(".lightbox").forEach((lightbox) => {
+  const carouselImages = lightbox.querySelector(".lightbox__carousel-images");
+  const carouselThumbnails = lightbox.querySelectorAll(
+    ".lightbox__carousel-thumbnails > *"
+  );
+  totalImages = carouselImages.children.length;
 
-nextImg.addEventListener('click', () => {
-  if (currentIndex < totalImages - 1) {
-    prevIndex = currentIndex;
-    currentIndex++;
-    carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-    carouselThumbnails[prevIndex].classList.remove('selected');
-    carouselThumbnails[currentIndex].classList.add('selected');
-  }
-  prevImg.disabled = currentIndex === 0;
-  nextImg.disabled = currentIndex === totalImages - 1;
-});
+  // ON CLICKING ARROW BUTTONS, GO TO NEXT OR PREVIOUS IMAGE, UPDATE THE THUMBNAIL ACCORDINGLY (ONLY IF ON DESKTOP)
+  const arrows = lightbox.querySelectorAll(".lightbox__carousel-controls");
 
-carouselThumbnails.forEach((thumbnail, idx) => {
-    thumbnail.addEventListener('click', () => {
-        if(thumbnail.classList.contains('selected')) {
-            // OPEN CAROUSEL OVERLAY
-        } else {
-            prevIndex = currentIndex;
-            currentIndex = idx;
-            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-            prevImg.disabled = currentIndex === 0;
-            nextImg.disabled = currentIndex === totalImages - 1;
-
-            carouselThumbnails[prevIndex].classList.remove('selected');
-            thumbnail.classList.add('selected');
+  arrows.forEach((arrow) => {
+    arrow.addEventListener("click", () => {
+      if (arrow.classList.contains("lightbox__carousel-prev")) {
+        if (currentIndex > 0) {
+          prevIndex = currentIndex;
+          currentIndex--;
+          carouselImages.style.transform = `translateX(-${
+            currentIndex * 100
+          }%)`;
         }
-    })
+      } else if (arrow.classList.contains("lightbox__carousel-next")) {
+        if (currentIndex < totalImages - 1) {
+          prevIndex = currentIndex;
+          currentIndex++;
+          carouselImages.style.transform = `translateX(-${
+            currentIndex * 100
+          }%)`;
+        }
+      }
+
+      arrows[0].disabled = currentIndex === 0;
+      arrows[1].disabled = currentIndex === totalImages - 1;
+
+      if (isDesktop.matches) {
+        carouselThumbnails[prevIndex].classList.remove("selected");
+        carouselThumbnails[currentIndex].classList.add("selected");
+      }
+    });
+  });
+
+  // SWITCH IMAGE ON CLICKING THUMBNAIL
+  carouselThumbnails.forEach((thumbnail, idx) => {
+    thumbnail.addEventListener('click', () => {
+        prevIndex = currentIndex;
+        currentIndex = idx;
+        if (thumbnail.classList.contains("selected")) {
+            // FOR OVERLAY
+        } else {
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+            carouselThumbnails[prevIndex].classList.remove("selected");
+            thumbnail.classList.add("selected");
+        }
+    });
+  });
+
+  // IF SWITCHING TO DESKTOP, UPDATE THUMBNAIL IMAGES (ONLY FOR NON OVERLAY LIGHTBOX)
+  if (!lightbox.parentElement.classList.contains("overlay__content")) {
+    if (isDesktop.matches) {        
+        carouselThumbnails[prevIndex].classList.remove("selected");
+        carouselThumbnails[currentIndex].classList.add("selected");
+    }
+
+    window.addEventListener("resize", () => {
+      if (isDesktop.matches) {
+        carouselThumbnails[prevIndex].classList.remove("selected");
+        carouselThumbnails[currentIndex].classList.add("selected");
+      } else {
+        arrows[0].disabled = currentIndex === 0;
+        arrows[1].disabled = currentIndex === totalImages - 1;
+        carouselThumbnails[currentIndex].classList.remove("selected");
+      }
+    });
+  }
 });
+
+// IF SWITCHING TO DESKTOP, UPDATE THUMBNAILS ACCORDINGLY
+
+// IF CLICKING ON A SELECTED THUMBNAIL, OPEN OVERLAY
+
+// IF SWITCHING FROM DESKTOP TO MOBILE VIEW, CLOSE OVERLAY
+
+// const lightboxOverlay = document.querySelector(".lightbox__overlay");
+
+// lightboxOverlay
+//   .querySelector(".close__overlay")
+//   .addEventListener("click", () => {
+//     lightboxOverlay.style.display = "none";
+//   });
+
+// document.querySelectorAll(".lightbox").forEach((lightbox) => {
+//   const carouselImages = lightbox.querySelector(".lightbox__carousel-images");
+//   const prevImg = lightbox.querySelector(".lightbox__carousel-prev");
+//   const nextImg = lightbox.querySelector(".lightbox__carousel-next");
+//   const carouselThumbnails = lightbox.querySelectorAll(
+//     ".lightbox__carousel-thumbnails > *"
+//   );
+//   carouselThumbnails[0].classList.add("selected");
+
+//   let prevIndex = -1;
+//   let currentIndex = 0;
+//   const totalImages = carouselImages.children.length;
+
+//   prevImg.addEventListener("click", () => {
+//     if (currentIndex > 0) {
+//       prevIndex = currentIndex;
+//       currentIndex--;
+//       carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+//       carouselThumbnails[prevIndex].classList.remove("selected");
+//       carouselThumbnails[currentIndex].classList.add("selected");
+//     }
+//     prevImg.disabled = currentIndex === 0;
+//     nextImg.disabled = currentIndex === totalImages - 1;
+//   });
+
+//   nextImg.addEventListener("click", () => {
+//     if (currentIndex < totalImages - 1) {
+//       prevIndex = currentIndex;
+//       currentIndex++;
+//       carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+//       carouselThumbnails[prevIndex].classList.remove("selected");
+//       carouselThumbnails[currentIndex].classList.add("selected");
+//     }
+//     prevImg.disabled = currentIndex === 0;
+//     nextImg.disabled = currentIndex === totalImages - 1;
+//   });
+
+//   carouselThumbnails.forEach((thumbnail, idx) => {
+//     thumbnail.addEventListener("click", () => {
+//       prevIndex = currentIndex;
+//       currentIndex = idx;
+//       if (thumbnail.classList.contains("selected")) {
+//         lightboxOverlay.style.display = "flex";
+//         lightboxOverlay.querySelector(
+//           ".lightbox__carousel-images"
+//         ).style.transform = `translateX(-${currentIndex * 100}%)`;
+//         lightboxOverlay.querySelectorAll(
+//             ".lightbox__carousel-thumbnails > *"
+//           )[prevIndex].classList.remove("selected");
+//         lightboxOverlay.querySelectorAll(
+//         ".lightbox__carousel-thumbnails > *"
+//         )[currentIndex].classList.add("selected");
+//         lightboxOverlay.querySelector(".lightbox__carousel-prev").disabled = currentIndex === 0;
+//         lightboxOverlay.querySelector(".lightbox__carousel-next").disabled = currentIndex === totalImages - 1;
+//       } else {
+//         carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+//         prevImg.disabled = currentIndex === 0;
+//         nextImg.disabled = currentIndex === totalImages - 1;
+
+//         carouselThumbnails[prevIndex].classList.remove("selected");
+//         thumbnail.classList.add("selected");
+//       }
+
+//     });
+//   });
+// });
