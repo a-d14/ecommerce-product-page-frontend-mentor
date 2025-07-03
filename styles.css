@@ -584,16 +584,16 @@
   }
 }
 
-@layer lightbox {
-  .lightbox {
+@layer carousel {
+  .carousel {
     position: relative;
-    .lightbox__carousel {
+    .carousel__body {
       height: inherit;
       position: relative;
       overflow: hidden;
     }
 
-    .lightbox__carousel-images {
+    .carousel__images {
       height: calc(300 / 16 * 1rem);
       display: flex;
 
@@ -618,7 +618,7 @@
 
     }
 
-    .lightbox__carousel-controls {
+    .carousel__controls {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -641,15 +641,15 @@
       }
     }
 
-    .lightbox__carousel-prev {
+    .carousel__prev {
       left: calc(16 / 16  * 1rem);
     }
 
-    .lightbox__carousel-next {
+    .carousel__next {
       right: calc(16 / 16  * 1rem);
     }
 
-    .lightbox__carousel-thumbnails {
+    .carousel__thumbnails {
       display: none;
 
       > * {
@@ -686,18 +686,19 @@
       flex: 0 0 calc(448 / 16 * 1rem);
     }
   }
+}
 
-  .overlay {
+@layer lightbox {
+  .lightbox {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.8);
     display: none;
-    /* display: flex; */
     justify-content: center;
     align-items: center;
     z-index: 3;
 
-    .overlay__content {
+    .lightbox__content {
       display: flex;
       flex-direction: column;
       gap: calc(24 / 16 * 1rem);
@@ -705,7 +706,7 @@
     }
 
 
-    .close__overlay {
+    .close__lightbox {
       align-self: flex-end;
       background: transparent;
       svg {
@@ -713,7 +714,7 @@
       }
     }
 
-    .close__overlay:hover {
+    .close__lightbox:hover {
       cursor: pointer;
       svg {
         fill: var(--orange-500);
@@ -721,27 +722,24 @@
       
     }
 
-    .lightbox {
-      .lightbox__carousel-controls {
-        display: block;
-        top: 40%;
-      }
-
-      .lightbox__carousel-prev {
-        left: calc(-16 / 16  * 1rem);
-        z-index: 4;
-      }
-  
-      .lightbox__carousel-next {
-        right: calc(-16 / 16  * 1rem);
-        z-index: 4;
-      }
-
-      @media (width >= calc(1440 / 16 * 1rem)) {
-        flex-grow: 0;
-        width: auto;
-      }
+    .carousel__controls {
+      display: block;
+      top: 40%;
     }
 
+    .carousel__prev {
+      left: calc(-16 / 16  * 1rem);
+      z-index: 4;
+    }
+
+    .carousel__next {
+      right: calc(-16 / 16  * 1rem);
+      z-index: 4;
+    }
+
+    @media (width >= calc(1440 / 16 * 1rem)) {
+      flex-grow: 0;
+      width: auto;
+    }
   }
 }

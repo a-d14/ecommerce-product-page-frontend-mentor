@@ -88,36 +88,36 @@
 
     <main>
       <article class="product-page">
-        <div class="lightbox">
+        <div class="carousel carousel-non-overlay">
           <button
-              class="lightbox__carousel-controls lightbox__carousel-prev"
-              aria-label="go to previous image"
-              disabled
-            >
-              <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M11 1 3 9l8 8"
-                  stroke="#1D2026"
-                  stroke-width="3"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <button
-              class="lightbox__carousel-controls lightbox__carousel-next"
-              aria-label="go to next image"
-            >
-              <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="m2 1 8 8-8 8"
-                  stroke="#1D2026"
-                  stroke-width="3"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </button>
-          <div class="lightbox__carousel">
-            <div class="lightbox__carousel-images">
+            class="carousel__controls carousel__prev"
+            aria-label="go to previous image"
+            disabled
+          >
+            <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11 1 3 9l8 8"
+                stroke="#1D2026"
+                stroke-width="3"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <button
+            class="carousel__controls carousel__next"
+            aria-label="go to next image"
+          >
+            <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m2 1 8 8-8 8"
+                stroke="#1D2026"
+                stroke-width="3"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <div class="carousel__body">
+            <div class="carousel__images">
               <img src="images/image-product-1.jpg" alt="product first image" />
               <img
                 src="images/image-product-2.jpg"
@@ -129,9 +129,8 @@
                 alt="product fourth image"
               />
             </div>
-            
           </div>
-          <div class="lightbox__carousel-thumbnails">
+          <div class="carousel__thumbnails">
             <button aria-label="product first image thumbnail">
               <img src="images/image-product-1-thumbnail.jpg" />
             </button>
@@ -191,60 +190,65 @@
           </div>
         </div>
       </article>
-      <div class="overlay">
-        <div class="overlay__content">
-          <button class="close__overlay" aria-label="close lightbox overlay">
-            <svg  width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+      <div class="lightbox">
+        <div class="lightbox__content">
+          <button class="close__lightbox" aria-label="close lightbox overlay">
+            <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
                 fill-rule="evenodd"
               />
             </svg>
           </button>
-          <div class="lightbox">
+          <div class="carousel">
             <button
-                class="lightbox__carousel-controls lightbox__carousel-prev"
-                aria-label="go to previous image"
-                disabled
-              >
-                <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M11 1 3 9l8 8"
-                    stroke="#1D2026"
-                    stroke-width="3"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-              <button
-                class="lightbox__carousel-controls lightbox__carousel-next"
-                aria-label="go to next image"
-              >
-                <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="m2 1 8 8-8 8"
-                    stroke="#1D2026"
-                    stroke-width="3"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            <div class="lightbox__carousel">
-              <div class="lightbox__carousel-images">
-                <img src="images/image-product-1.jpg" alt="product first image" />
+              class="carousel__controls carousel__prev"
+              aria-label="go to previous image"
+              disabled
+            >
+              <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11 1 3 9l8 8"
+                  stroke="#1D2026"
+                  stroke-width="3"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+            <button
+              class="carousel__controls carousel__next"
+              aria-label="go to next image"
+            >
+              <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="m2 1 8 8-8 8"
+                  stroke="#1D2026"
+                  stroke-width="3"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </button>
+            <div class="carousel__body">
+              <div class="carousel__images">
+                <img
+                  src="images/image-product-1.jpg"
+                  alt="product first image"
+                />
                 <img
                   src="images/image-product-2.jpg"
                   alt="product second image"
                 />
-                <img src="images/image-product-3.jpg" alt="product third image" />
+                <img
+                  src="images/image-product-3.jpg"
+                  alt="product third image"
+                />
                 <img
                   src="images/image-product-4.jpg"
                   alt="product fourth image"
                 />
               </div>
-              
             </div>
-            <div class="lightbox__carousel-thumbnails">
+            <div class="carousel__thumbnails">
               <button aria-label="product first image thumbnail">
                 <img src="images/image-product-1-thumbnail.jpg" />
               </button>
@@ -260,7 +264,6 @@
             </div>
           </div>
         </div>
-        
       </div>
     </main>
 

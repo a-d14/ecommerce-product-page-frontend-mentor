@@ -135,166 +135,166 @@ addItemToCart.addEventListener("click", () => {
   }
 });
 
-// LIGHTBOX COMPONENT
+// CAROUSEL
 const isDesktop = window.matchMedia("(width >= calc(1440 / 16 * 1rem))");
 
-let prevIndex = 0;
-let currentIndex = 0;
-let totalImages = 0;
+// document.querySelectorAll('.carousel').forEach(carousel => {
+//     const carouselImages = carousel.querySelector(".carousel__images");
+//     let currentImageIndex = 0;
+//     const totalImages = carouselImages.children.length;
 
-document.querySelectorAll(".lightbox").forEach((lightbox) => {
-  const carouselImages = lightbox.querySelector(".lightbox__carousel-images");
-  const carouselThumbnails = lightbox.querySelectorAll(
-    ".lightbox__carousel-thumbnails > *"
-  );
-  totalImages = carouselImages.children.length;
+//     // MOVE TO PREVIOUS OR NEXT BASED ON ARROW CLICKED
+//     const prev = carousel.querySelector(".carousel__prev");
+//     const next = carousel.querySelector(".carousel__next");
 
-  // ON CLICKING ARROW BUTTONS, GO TO NEXT OR PREVIOUS IMAGE, UPDATE THE THUMBNAIL ACCORDINGLY (ONLY IF ON DESKTOP)
-  const arrows = lightbox.querySelectorAll(".lightbox__carousel-controls");
+//     prev.addEventListener('click', () => {
+//         currentImageIndex--;
+//         carouselImages.style.transform = `translateX(-${(currentImageIndex) * 100}%)`;
+//         prev.disabled = currentImageIndex === 0;
+//         next.disabled = currentImageIndex === totalImages - 1;
+//     });
 
-  arrows.forEach((arrow) => {
-    arrow.addEventListener("click", () => {
-      if (arrow.classList.contains("lightbox__carousel-prev")) {
-        if (currentIndex > 0) {
-          prevIndex = currentIndex;
-          currentIndex--;
-          carouselImages.style.transform = `translateX(-${
-            currentIndex * 100
-          }%)`;
+//     next.addEventListener('click', () => {
+//         currentImageIndex++;
+//         carouselImages.style.transform = `translateX(-${(currentImageIndex) * 100}%)`;
+//         prev.disabled = currentImageIndex === 0;
+//         next.disabled = currentImageIndex === totalImages - 1;
+//     });
+
+//     // HIGHLIGHT THUMBNAIL ON DESKTOP AND CHANGE HIGHLIGHT ON CLICK
+//     const carouselThumbnails = document.querySelectorAll(".carousel__thumbnails > *");
+
+//     if(isDesktop.matches) {
+//         carouselThumbnails[currentImageIndex].classList.add('selected');
+//     } else {
+//         carouselThumbnails.forEach(thumbnail => thumbnail.classList.remove('selected'))
+//     }
+
+//     window.addEventListener('resize', () => {
+//         if(isDesktop.matches) {
+//             carouselThumbnails[currentImageIndex].classList.add('selected');
+//         } else {
+//             carouselThumbnails.forEach(thumbnail => thumbnail.classList.remove('selected'));
+//         }
+//     });
+
+//     carouselThumbnails.forEach((thumbnail, idx) => {
+//         thumbnail.addEventListener('click', () => {
+//             if(thumbnail.classList.contains('selected') && carousel.classList.contains('carousel-non-overlay')) {
+//                 const lightbox = document.querySelector(".lightbox");
+//                 lightbox.style.display = "flex";
+
+//                 const lightboxCarousel = lightbox.querySelector(".carousel");
+//                 const lightboxCarouselImages = document.querySelector(".carousel__images");
+//                 lightboxCarouselImages.style.transform = `translateX(-${(currentImageIndex) * 100}%)`;
+
+//                 const lightboxCarouselPrev = lightboxCarousel.querySelector(".carousel__prev");
+//                 const lightboxCarouselNext = lightboxCarousel.querySelector(".carousel__next");
+
+//                 lightboxCarouselPrev.disabled = currentImageIndex === 0;
+//                 lightboxCarouselNext.disabled = currentImageIndex === totalImages - 1;
+
+//                 const lightboxCarouselThumbnails = lightboxCarousel.querySelectorAll(".carousel__thumbnails > *");
+//                 lightboxCarouselThumbnails[currentImageIndex].classList.add('selected');
+
+//                 console.log(lightboxCarouselThumbnails[currentImageIndex]);
+//             } 
+
+//             carouselThumbnails.forEach(thumbnail => thumbnail.classList.remove('selected'));
+//             thumbnail.classList.add('selected');
+            
+
+//             currentImageIndex = idx;
+//             carouselImages.style.transform = `translateX(-${(currentImageIndex) * 100}%)`;
+
+//             prev.disabled = currentImageIndex === 0;
+//             next.disabled = currentImageIndex === totalImages - 1;
+//         })
+//     });
+// });
+
+function initCarousel(carousel, startingIndex = 0) {
+    const carouselImages = carousel.querySelector(".carousel__images");
+    const prev = carousel.querySelector(".carousel__prev");
+    const next = carousel.querySelector(".carousel__next");
+    const carouselThumbnails = carousel.querySelectorAll(".carousel__thumbnails > *");
+    let currentImageIndex = startingIndex;
+    const totalImages = carouselImages.children.length;
+
+    function updateUI() {
+        carouselImages.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+        prev.disabled = currentImageIndex === 0;
+        next.disabled = currentImageIndex === totalImages - 1;
+
+        carouselThumbnails.forEach(thumb => thumb.classList.remove('selected'));
+        if (isDesktop.matches) {
+            carouselThumbnails[currentImageIndex]?.classList.add('selected');
         }
-      } else if (arrow.classList.contains("lightbox__carousel-next")) {
-        if (currentIndex < totalImages - 1) {
-          prevIndex = currentIndex;
-          currentIndex++;
-          carouselImages.style.transform = `translateX(-${
-            currentIndex * 100
-          }%)`;
-        }
-      }
-
-      arrows[0].disabled = currentIndex === 0;
-      arrows[1].disabled = currentIndex === totalImages - 1;
-
-      if (isDesktop.matches) {
-        carouselThumbnails[prevIndex].classList.remove("selected");
-        carouselThumbnails[currentIndex].classList.add("selected");
-      }
-    });
-  });
-
-  // SWITCH IMAGE ON CLICKING THUMBNAIL
-  carouselThumbnails.forEach((thumbnail, idx) => {
-    thumbnail.addEventListener('click', () => {
-        prevIndex = currentIndex;
-        currentIndex = idx;
-        if (thumbnail.classList.contains("selected")) {
-            // FOR OVERLAY
-        } else {
-            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-            carouselThumbnails[prevIndex].classList.remove("selected");
-            thumbnail.classList.add("selected");
-        }
-    });
-  });
-
-  // IF SWITCHING TO DESKTOP, UPDATE THUMBNAIL IMAGES (ONLY FOR NON OVERLAY LIGHTBOX)
-  if (!lightbox.parentElement.classList.contains("overlay__content")) {
-    if (isDesktop.matches) {        
-        carouselThumbnails[prevIndex].classList.remove("selected");
-        carouselThumbnails[currentIndex].classList.add("selected");
     }
 
-    window.addEventListener("resize", () => {
-      if (isDesktop.matches) {
-        carouselThumbnails[prevIndex].classList.remove("selected");
-        carouselThumbnails[currentIndex].classList.add("selected");
-      } else {
-        arrows[0].disabled = currentIndex === 0;
-        arrows[1].disabled = currentIndex === totalImages - 1;
-        carouselThumbnails[currentIndex].classList.remove("selected");
-      }
+    prev.addEventListener('click', () => {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            updateUI();
+        }
     });
-  }
+
+    next.addEventListener('click', () => {
+        if (currentImageIndex < totalImages - 1) {
+            currentImageIndex++;
+            updateUI();
+        }
+    });
+
+    carouselThumbnails.forEach((thumbnail, idx) => {
+        thumbnail.addEventListener('click', () => {
+            const isAlreadySelected = thumbnail.classList.contains('selected');
+
+            if (isAlreadySelected && carousel.classList.contains('carousel-non-overlay')) {
+                const lightbox = document.querySelector(".lightbox");
+                const lightboxCarousel = lightbox.querySelector(".carousel");
+
+                lightbox.style.display = "flex";
+
+                initCarousel(lightboxCarousel, idx);
+                return;
+            }
+
+            currentImageIndex = idx;
+            updateUI();
+        });
+    });
+
+    updateUI();
+
+    window.addEventListener('resize', () => {
+        carouselThumbnails.forEach(thumb => thumb.classList.remove('selected'));
+        if (isDesktop.matches) {
+            carouselThumbnails[currentImageIndex]?.classList.add('selected');
+        }
+    });
+}
+
+document.querySelectorAll('.carousel').forEach(carousel => {
+    initCarousel(carousel);
 });
 
-// IF SWITCHING TO DESKTOP, UPDATE THUMBNAILS ACCORDINGLY
+// LIGHTBOX
+const closeLightboxButton = document.querySelector(".close__lightbox");
 
-// IF CLICKING ON A SELECTED THUMBNAIL, OPEN OVERLAY
+const closeLightBox = function () {
+    const lightbox = document.querySelector('.lightbox');
+    lightbox.style.display = "none";
 
-// IF SWITCHING FROM DESKTOP TO MOBILE VIEW, CLOSE OVERLAY
+    const lightboxCarousel = lightbox.querySelector(".carousel");
+    const lightboxCarouselThumbnails = lightboxCarousel.querySelectorAll(".carousel__thumbnails > *");
+    lightboxCarouselThumbnails.forEach(thumbnail => thumbnail.classList.remove('selected'));
+}
 
-// const lightboxOverlay = document.querySelector(".lightbox__overlay");
+closeLightboxButton.addEventListener('click', closeLightBox);
 
-// lightboxOverlay
-//   .querySelector(".close__overlay")
-//   .addEventListener("click", () => {
-//     lightboxOverlay.style.display = "none";
-//   });
-
-// document.querySelectorAll(".lightbox").forEach((lightbox) => {
-//   const carouselImages = lightbox.querySelector(".lightbox__carousel-images");
-//   const prevImg = lightbox.querySelector(".lightbox__carousel-prev");
-//   const nextImg = lightbox.querySelector(".lightbox__carousel-next");
-//   const carouselThumbnails = lightbox.querySelectorAll(
-//     ".lightbox__carousel-thumbnails > *"
-//   );
-//   carouselThumbnails[0].classList.add("selected");
-
-//   let prevIndex = -1;
-//   let currentIndex = 0;
-//   const totalImages = carouselImages.children.length;
-
-//   prevImg.addEventListener("click", () => {
-//     if (currentIndex > 0) {
-//       prevIndex = currentIndex;
-//       currentIndex--;
-//       carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-//       carouselThumbnails[prevIndex].classList.remove("selected");
-//       carouselThumbnails[currentIndex].classList.add("selected");
-//     }
-//     prevImg.disabled = currentIndex === 0;
-//     nextImg.disabled = currentIndex === totalImages - 1;
-//   });
-
-//   nextImg.addEventListener("click", () => {
-//     if (currentIndex < totalImages - 1) {
-//       prevIndex = currentIndex;
-//       currentIndex++;
-//       carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-//       carouselThumbnails[prevIndex].classList.remove("selected");
-//       carouselThumbnails[currentIndex].classList.add("selected");
-//     }
-//     prevImg.disabled = currentIndex === 0;
-//     nextImg.disabled = currentIndex === totalImages - 1;
-//   });
-
-//   carouselThumbnails.forEach((thumbnail, idx) => {
-//     thumbnail.addEventListener("click", () => {
-//       prevIndex = currentIndex;
-//       currentIndex = idx;
-//       if (thumbnail.classList.contains("selected")) {
-//         lightboxOverlay.style.display = "flex";
-//         lightboxOverlay.querySelector(
-//           ".lightbox__carousel-images"
-//         ).style.transform = `translateX(-${currentIndex * 100}%)`;
-//         lightboxOverlay.querySelectorAll(
-//             ".lightbox__carousel-thumbnails > *"
-//           )[prevIndex].classList.remove("selected");
-//         lightboxOverlay.querySelectorAll(
-//         ".lightbox__carousel-thumbnails > *"
-//         )[currentIndex].classList.add("selected");
-//         lightboxOverlay.querySelector(".lightbox__carousel-prev").disabled = currentIndex === 0;
-//         lightboxOverlay.querySelector(".lightbox__carousel-next").disabled = currentIndex === totalImages - 1;
-//       } else {
-//         carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-//         prevImg.disabled = currentIndex === 0;
-//         nextImg.disabled = currentIndex === totalImages - 1;
-
-//         carouselThumbnails[prevIndex].classList.remove("selected");
-//         thumbnail.classList.add("selected");
-//       }
-
-//     });
-//   });
-// });
+window.addEventListener("resize", () => {
+    if(!isDesktop.matches) {
+        closeLightBox();
+    }
+})
