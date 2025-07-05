@@ -627,19 +627,17 @@
       width: calc(40 / 16 * 1rem);
       height: calc(40 / 16 * 1rem);
       border-radius: 50%;
-      
+
       display: flex;
       justify-content: center;
       align-items: center;
 
+      svg {
+        fill: none;
+      }
+
       @media  (width >= calc(1440 / 16 * 1rem)) {
         display: none;
-      }
-    }
-
-    .carousel__controls:hover {
-      svg {
-        fill: var(--orange-500);
       }
     }
 
