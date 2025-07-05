@@ -25,9 +25,9 @@ Users should be able to:
 - Add items to the cart
 - View the cart and remove items from it
 
-### Screenshot
+### Demo
 
-<video loop src="demo.mp4">Demo</video> 
+https://github.com/user-attachments/assets/dc51585b-d4a3-4519-afdf-2737bdb32f17
 
 ### Links
 
