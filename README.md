@@ -27,12 +27,12 @@ Users should be able to:
 
 ### Screenshot
 
-<video loop src="movie.mp4">Demo</video> 
+<video loop src="demo.mp4">Demo</video> 
 
 ### Links
 
 - Solution URL: [URL](https://github.com/a-d14/ecommerce-product-page-frontend-mentor)
-- Live Site URL: [URL](https://your-live-site-url.com)
+- Live Site URL: [URL](https://a-d14.github.io/ecommerce-product-page-frontend-mentor)
 
 ## My process
 
